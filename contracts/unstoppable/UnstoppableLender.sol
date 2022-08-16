@@ -33,6 +33,9 @@ contract UnstoppableLender is ReentrancyGuard {
         require(balanceBefore >= borrowAmount, "Not enough tokens in pool");
 
         // Ensured by the protocol via the `depositTokens` function
+        /*  attacker can directly send token to this contract and will result into increase of poolBalance value and hence
+            it break the smart-contract
+         */
         assert(poolBalance == balanceBefore);
         
         damnValuableToken.transfer(msg.sender, borrowAmount);
